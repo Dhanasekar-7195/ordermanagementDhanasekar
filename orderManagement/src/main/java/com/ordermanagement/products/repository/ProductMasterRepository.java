@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.ordermanagement.products.dao.ProductMasterDAO;
 import com.ordermanagement.products.dto.ProductMasterDTO;
 import com.ordermanagement.products.entity.ProductMasterEntity;
-import com.ordermanagement.sampleexception.UserNotFoundException;
+import com.ordermanagement.sampleexception.ProductNotFoundException;
 
 
 
@@ -83,8 +83,8 @@ public class ProductMasterRepository {
 	    }
 	}
 	
-	public ProductMasterDTO GetProductMasterById(String prodId)throws UserNotFoundException {
-		ProductMasterEntity pmENT = pmDAO.getCuDById(prodId);
+	public ProductMasterDTO GetProductMasterById(String prodId)throws ProductNotFoundException {
+		ProductMasterEntity pmENT = pmDAO.getPrDById(prodId);
 		ProductMasterDTO pmDTO= new ProductMasterDTO();
 		if (pmENT!=null) {
 		pmDTO.setProdId(pmENT.getProdId());
@@ -99,7 +99,7 @@ public class ProductMasterRepository {
 		}
 		else
 		{
-			throw new UserNotFoundException("user not found");				
+			throw new ProductNotFoundException("product not found");				
 		}
 	}
 
@@ -109,7 +109,7 @@ public class ProductMasterRepository {
 		return vmList;
 	}
 	public Map<String, Object> DeleteProductMasterById(String prodId) {
-		if(pmDAO.getCuDById(prodId)!= null) {
+		if(pmDAO.getPrDById(prodId)!= null) {
 			pmDAO.deleteById(prodId);
 			Map<String, Object> response = new LinkedHashMap<>();
 			response.put("status","success");
@@ -120,6 +120,32 @@ public class ProductMasterRepository {
 		response.put("id","not_found");
 		return response;	
 		}
+	
+	public ProductMasterDTO GetProductMasterByProductName(String productName)throws ProductNotFoundException {
+		ProductMasterEntity pmENT = pmDAO.getPrDByProductName(productName);
+		ProductMasterDTO pmDTO= new ProductMasterDTO();
+		if (pmENT!=null) {
+		pmDTO.setProdId(pmENT.getProdId());
+		pmDTO.setProductName(pmENT.getProductName());
+		pmDTO.setCategory(pmENT.getCategory());
+		pmDTO.setSubCategory(pmENT.getSubCategory());
+		pmDTO.setTAX(pmENT.getTAX());
+		pmDTO.setUnit(pmENT.getUnit());
+		pmDTO.setPrice(pmENT.getPrice());
+		pmDTO.setDiscount(pmENT.getDiscount());
+		return pmDTO;
+		}
+		else
+		{
+			throw new ProductNotFoundException("product not found");				
+		}
+	}
+	
+	// search API
+	public List<ProductMasterEntity> SearchByProductName(String productName) {
+		List<ProductMasterEntity> vList= pmDAO.getAllProductById(productName);
+		return vList;
+	}
 	
 
 	

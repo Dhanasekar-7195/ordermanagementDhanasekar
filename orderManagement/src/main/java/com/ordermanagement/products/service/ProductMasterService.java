@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import com.ordermanagement.products.dto.ProductMasterDTO;
 import com.ordermanagement.products.entity.ProductMasterEntity;
 import com.ordermanagement.products.repository.ProductMasterRepository;
-import com.ordermanagement.sampleexception.UserNotFoundException;
+import com.ordermanagement.sampleexception.ProductNotFoundException;
 
 
 @Component
@@ -31,7 +31,7 @@ public class ProductMasterService {
 		return this.pmRepo.UpdateProductMaster(pmDTO);
 	}
 	
-	public ProductMasterDTO GetProductMasterById(String prodId)throws UserNotFoundException {
+	public ProductMasterDTO GetProductMasterById(String prodId)throws ProductNotFoundException {
 		return this.pmRepo.GetProductMasterById(prodId);
 	}
 	
@@ -41,6 +41,14 @@ public class ProductMasterService {
 	
 	public Map<String, Object> DeleteProductMasterById(String prodId) {
 		return this.pmRepo.DeleteProductMasterById(prodId);
+	}
+	
+	public ProductMasterDTO GetProductMasterByProductName(String productName)throws ProductNotFoundException {
+		return this.pmRepo.GetProductMasterByProductName(productName);
+	}
+	
+	public List<ProductMasterEntity> SearchByProductName(String productName) {
+		return this.pmRepo.SearchByProductName(productName);
 	}
 	
 	

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ordermanagement.products.dto.ProductMasterDTO;
 import com.ordermanagement.products.entity.ProductMasterEntity;
 import com.ordermanagement.products.service.ProductMasterService;
-import com.ordermanagement.sampleexception.UserNotFoundException;
+import com.ordermanagement.sampleexception.ProductNotFoundException;
 
 import io.swagger.annotations.Api;
 
@@ -28,7 +28,7 @@ import io.swagger.annotations.Api;
 @RequestMapping("api/productmaster")
 @Api(description = "Productmaster Service", tags = { "ProductmasterAPI" })  
 
-public class CustomerDetailsController {
+public class ProductMasterController {
 	
 	@Autowired
 	private ProductMasterService pmService;
@@ -44,7 +44,7 @@ public class CustomerDetailsController {
 	}
 	
 	@GetMapping("/get_productmaster_by_id/{prodId}")
-	public ProductMasterDTO GetProductMasterById(@PathVariable String prodId) throws UserNotFoundException{
+	public ProductMasterDTO GetProductMasterById(@PathVariable String prodId) throws ProductNotFoundException{
 		return this.pmService.GetProductMasterById(prodId);
 	}
 	
@@ -57,6 +57,16 @@ public class CustomerDetailsController {
 	@DeleteMapping("/delete_productmaster_by_id/{prodId}")
 	public Map<String, Object> DeleteProductMasterById(@PathVariable String prodId) {
 		return this.pmService.DeleteProductMasterById(prodId);
+	}
+	
+	@GetMapping("/get_productmaster_by_productname/{productName}")
+	public ProductMasterDTO GetProductMasterByProductName(@PathVariable String productName) throws ProductNotFoundException{
+		return this.pmService.GetProductMasterByProductName(productName);
+	}
+	
+	@GetMapping("/search_by_productname/{productName}")
+	public List<ProductMasterEntity> SearchByProductName(@PathVariable String productName) {
+		return this.pmService.SearchByProductName(productName);
 	}
 	
 	
