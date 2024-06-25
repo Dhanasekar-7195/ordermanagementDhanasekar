@@ -20,9 +20,21 @@ public class OrderMasterService {
 	public Map<String, Object> AddOrderMaster(OrderMasterDTO omDTO) {
 		return this.omRepo.AddOrderMaster(omDTO);
 	}
+	
+	public Map<String, Object> AddUpdateDeleteOrderMaster(OrderMasterDTO omDTO) {
+		return this.omRepo.AddUpdateDeleteOrderMaster(omDTO);   
+	}
 
 	public List<OrderMasterEntity> SearchByOrderId(String orderId) {
 		return this.omRepo.SearchByProductName(orderId);
+	}
+	
+	public List<OrderMasterEntity> GetAllOrderMaster() {
+		return this.omRepo.GetAllOrderMaster();
+	}
+	
+	public Map<String, Object> UpdateOrderMaster(OrderMasterDTO omDTO) {
+		return this.omRepo.UpdateOrderMaster(omDTO);   
 	}
 
 }

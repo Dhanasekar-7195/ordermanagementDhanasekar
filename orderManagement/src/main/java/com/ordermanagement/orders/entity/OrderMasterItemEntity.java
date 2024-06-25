@@ -36,22 +36,20 @@ public class OrderMasterItemEntity {
 	})
 	
     @Id
-	private String orderMasterItemId;
+    private String orderMasterItemId;
+		
+	private String productName;
+		
+	private String category;
 	
-	private long sNo;
+	private String subCategory;
 	
-	private String description;
-	
-	private String part;
-	
-	private String uom;
+	private double price;
 	
 	private long qty;
 	
-	private double rate;
-	
-	private double amount;
-	
+	private double totalAmount;
+		
 	private String orderId;
 
 }

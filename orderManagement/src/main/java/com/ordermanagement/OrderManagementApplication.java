@@ -24,5 +24,7 @@ public class OrderManagementApplication extends SpringBootServletInitializer{
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(OrderManagementApplication.class);
 	}
+	
+	
 
 }

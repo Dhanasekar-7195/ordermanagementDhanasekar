@@ -18,44 +18,20 @@ public class OrderMasterDTO {
 	
 	private String orderId;
 	
-	private String invoiceNo;
-	
-	private String supplier;
-	
-	private String type;
-	
-	private String glGroup;
-	
 	private String orderDate;
 	
-	private String name;
+	private String deliveryLocation;
 	
-	private String addressLine1;
+	private String deliveryAddress;
 	
-	private String addressLine2;
+	private String contactPerson;
 	
-	private String phone;
-	
-	private String fax;
-	
-	private String tel;
+	private String contactNumber;
 	
 	private String comments;
 	
-	private double creditLimit;
+	private double total;
 	
-	private double outstanding;
-	
-	private double available;
-	
-	private double Amount;
-	
-	private double tax;
-
-	private double totalAmount;
-	
-	private String notes;
-
 	private List<OrderMasterItemDTO> items;
 
 }
