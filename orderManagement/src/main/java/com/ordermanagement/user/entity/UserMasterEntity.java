@@ -32,7 +32,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class UserMasterEntity {
-	
+
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@GenericGenerator(name = "generator", strategy = "com.ordermanagement.SequenceGenerator.StringPrefixedSequenceGenerator", parameters = {
 
@@ -41,33 +41,39 @@ public class UserMasterEntity {
 			@Parameter(name = StringPrefixedSequenceGenerator.NUMBER_FORMATE_PARAMETER, value = "%05d"),
 
 	})
-		
+
 	@Id
 	private String userId;
-	
+
 	private String userName;
-	
-	@ValidPassword
+
+	//@ValidPassword
 	private String password;
-	
+
 	private boolean active;
-	
+
 	private String role;
-	
+
 	private String email;
-	
+
 	private String token;
+
+	private String companyName;
+
+	private String mobileNumber;
 	
-	private String OrganisationId;
+	private String location;
 	
-	private String OrganisationName;
-	
-	private String phoneNumber;
+//	private String shippingAddress1;
+//	
+//	private String shippingAddress2;
 
 	@Column(columnDefinition = "TIMESTAMP")
 	private LocalDateTime tokenCreationDate;
 	
+	private double returnCredit;
 	
+	private String tenantId;
 
 
 }

@@ -39,24 +39,36 @@ public class ReturnMasterEntity {
 			@Parameter(name = StringPrefixedSequenceGenerator.NUMBER_FORMATE_PARAMETER, value = "%05d"),
 
 	})
-	
+
 	@Id
 	private String returnId;
-	
+
+	private String returnDate;
+
 	private String invoiceNumber;
-	
+
 	private String reason;
-	
+
 	private String contactPerson;
-	
+
 	private String email;
-	
-	private double totalCredit;
-	
+
+	private double returnCredit;
+
 	private String notes;
+
+	private String customerId;
 	
-	@OneToMany(targetEntity = ReturnMasterItemEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name="returnId",referencedColumnName = "returnId")
-    private List<ReturnMasterItemEntity> items;
+	private String orderId;
+	
+	private String contactNumber;
+
+	private String shippingAddress;
+	
+	private String initiatedBy;
+
+	@OneToMany(targetEntity = ReturnMasterItemEntity.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "returnId", referencedColumnName = "returnId")
+	private List<ReturnMasterItemEntity> items;
 
 }

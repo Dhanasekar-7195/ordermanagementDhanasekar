@@ -23,8 +23,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "order_master")
-@Table(name = "order_master")
+@Entity(name = "order_master_sap")
+@Table(name = "order_master_sap")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @Builder
@@ -39,26 +39,89 @@ public class OrderMasterEntity {
 			@Parameter(name = StringPrefixedSequenceGenerator.NUMBER_FORMATE_PARAMETER, value = "%05d"),
 
 	})
-	
+
 	@Id
-    private String orderId;
+	private String orderId;
+	
+	private String salesOrderType;
+	
+	private String salesOrganization;
+	
+	private String distributionChannel;
+	
+	private String organizationDivision;
+	
+	private String customerId;
 	
 	private String orderDate;
 	
-	private String deliveryLocation;
+	private String incotermsClassification;
 	
-	private String deliveryAddress;
+	private String incotermsTransferLocation;
 	
 	private String contactPerson;
 	
-	private String contactNumber;
+	private String deliveryLocation;
 	
-	private String comments;
+	private String postalCode;
+	
+	private String streetName;
+	
+	private String region;
+	
+	private String telephoneNumber;
 	
 	private double total;
 	
-	@OneToMany(targetEntity = OrderMasterItemEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name="orderId",referencedColumnName = "orderId")
-    private List<OrderMasterItemEntity> items;
+    private String status;
+    
+    private String salesOrderId;
 
+	@OneToMany(targetEntity = OrderMasterItemEntity.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "orderId", referencedColumnName = "orderId")
+	private List<OrderMasterItemEntity> items;
+	
 }
+	
+	//private String mobileNumber;
+//	private String orderId;
+//
+//	private String invoiceNo;
+//
+//	private String orderDate;
+//
+//	private String deliveryLocation;
+//
+//	private String deliveryAddress;
+//
+//	private String contactPerson;
+//
+//	private String contactNumber;
+//
+//	private String comments;
+//
+	 //
+//
+//	private String paymentId;
+//
+//	private String deliveryId;
+//	
+//	private String draftId;
+//
+//	private double payableAmount;
+//
+//	private double paidAmount;
+//
+//	private String deliveredDate;
+//
+//	private String paymentDate;
+//
+//	private String paymentMode;
+//
+//	private String paymentStatus;
+//
+//	private String customerId;
+//	
+	
+
+//}

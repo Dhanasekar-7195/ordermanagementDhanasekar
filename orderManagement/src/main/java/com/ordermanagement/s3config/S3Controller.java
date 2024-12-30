@@ -20,46 +20,45 @@ import io.swagger.annotations.Api;
 
 @RestController
 @RequestMapping("api/v1_aws_s3_bucket")
-@Api(description = "AwsS3 Bucket Service", tags = { "AwsS3BucketAPI" })  
+@Api(description = "AwsS3 Bucket Service", tags = { "AwsS3BucketAPI" })
 public class S3Controller {
 
-    private final S3Service s3Service;
+	private final S3Service s3Service;
 
-    public S3Controller(S3Service s3Service) {
-        this.s3Service = s3Service;
-    }
+	public S3Controller(S3Service s3Service) {
+		this.s3Service = s3Service;
+	}
 
-    @GetMapping
-    public String health() {
-        return "UP";
-    }
+	@GetMapping
+	public String health() {
+		return "UP";
+	}
 
-    @PostMapping(path = "/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public String uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
-        s3Service.uploadFile(file.getOriginalFilename(), file);
-        return "File uploaded";
-    }
+	@PostMapping(path = "/upload", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+	public String uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+		s3Service.uploadFile(file.getOriginalFilename(), file);
+		return "File uploaded";
+	}
 
-    @GetMapping("/download/{fileName}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
-        return ResponseEntity.ok()
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(new InputStreamResource(s3Service.getFile(fileName).getObjectContent()));
-    }
+	@GetMapping("/download/{fileName}")
+	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
+		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.body(new InputStreamResource(s3Service.getFile(fileName).getObjectContent()));
+	}
 
-    @GetMapping("/view/{fileName}")
-    public ResponseEntity<InputStreamResource> viewFile(@PathVariable String fileName) {
-        var s3Object = s3Service.getFile(fileName);
-        var content = s3Object.getObjectContent();
-        return ResponseEntity.ok()
-                .contentType(MediaType.IMAGE_PNG) // This content type can change by your file :)
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\""+fileName+"\"")
-                .body(new InputStreamResource(content));
-    }
+	@GetMapping("/view/{fileName}")
+	public ResponseEntity<InputStreamResource> viewFile(@PathVariable String fileName) {
+		var s3Object = s3Service.getFile(fileName);
+		var content = s3Object.getObjectContent();
+		return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG) // This content type can change by your file :)
+				.header(HttpHeaders.CONTENT_TYPE, "image/png")
+				.header(HttpHeaders.CONTENT_LENGTH, String.valueOf(s3Object.getObjectMetadata().getContentLength()))
+				.body(new InputStreamResource(content));
+	}
 
-    @DeleteMapping("/delete/{fileName}")
-    public String deleteFile(@PathVariable String fileName) {
-        s3Service.deleteObject(fileName);
-        return "File deleted";
-    }
+	@DeleteMapping("/delete/{fileName}")
+	public String deleteFile(@PathVariable String fileName) {
+		s3Service.deleteObject(fileName);
+		return "File deleted";
+	}
 }

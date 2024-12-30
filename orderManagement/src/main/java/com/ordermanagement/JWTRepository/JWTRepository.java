@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.ordermanagement.JWTEntity.JWTEntity;
 
-public interface JWTRepository extends JpaRepository<JWTEntity, String>{
-	
+public interface JWTRepository extends JpaRepository<JWTEntity, String> {
+
 	@Query(value = "DELETE FROM jwtresponse where jwttoken=?1 ", nativeQuery = true)
 	public String deleteByToken(String token);
 

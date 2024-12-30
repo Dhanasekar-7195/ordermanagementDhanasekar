@@ -10,17 +10,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 public class LoginTokenDTO {
-	
+
 	private String token;
-	
+
 	private String role;
-		
+
 	private String userId;
-	
-	private String OrganisationId;
-	
-	private String OrganisationName;
-	
-	private String phoneNumber;
-	
+
+	private String location;
+
+	private String companyName;
+
+	private String mobileNumber;
+
 }

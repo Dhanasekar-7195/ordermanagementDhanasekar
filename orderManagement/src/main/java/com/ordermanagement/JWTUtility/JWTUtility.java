@@ -9,16 +9,18 @@ import java.util.function.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.ordermanagement.user.entity.UserMasterEntity;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JWTUtility implements Serializable {
-	
+
 	private static final long serialVersionUID = 234234523523L;
 
-	public static final long JWT_TOKEN_VALIDITY =2*60*60;
+	public static final long JWT_TOKEN_VALIDITY = 2 * 60 * 60;
 
 	private String secretKey = "S4th!Sh.M@!ky4m.c0m";
 
@@ -61,5 +63,10 @@ public class JWTUtility implements Serializable {
 		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
 	}
 
+	public String generateToken(UserMasterEntity user) {
+		Map<String, Object> claims = new HashMap<>();
+		claims.put("role", user.getRole());
+		return doGenerateToken(claims, user.getEmail());
+	}
 
 }

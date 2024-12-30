@@ -1,6 +1,7 @@
 package com.ordermanagement.SequenceGenerator;
 
 import java.io.Serializable;
+
 import java.util.Properties;
 
 import org.hibernate.HibernateException;
@@ -13,7 +14,7 @@ import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
 
 public class StringPrefixedSequenceGenerator extends SequenceStyleGenerator {
-	
+
 	public static final String VALUE_PREFIX_PARAMETER = "valuePrefix";
 	public static final String VALUE_PREFIX_DEFAULT = "";
 	private String valuePrefix;

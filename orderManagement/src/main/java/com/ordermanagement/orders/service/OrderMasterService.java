@@ -9,32 +9,68 @@ import org.springframework.stereotype.Component;
 import com.ordermanagement.orders.dto.OrderMasterDTO;
 import com.ordermanagement.orders.entity.OrderMasterEntity;
 import com.ordermanagement.orders.repository.OrderMasterRepository;
-import com.ordermanagement.products.entity.ProductMasterEntity;
 
 @Component
 public class OrderMasterService {
-	
+
 	@Autowired
 	private OrderMasterRepository omRepo;
 
-	public Map<String, Object> AddOrderMaster(OrderMasterDTO omDTO) {
-		return this.omRepo.AddOrderMaster(omDTO);
-	}
-	
-	public Map<String, Object> AddUpdateDeleteOrderMaster(OrderMasterDTO omDTO) {
-		return this.omRepo.AddUpdateDeleteOrderMaster(omDTO);   
+	public Map<String, Object> addOrderMaster(OrderMasterDTO omDTO) {
+		return this.omRepo.addOrderMaster(omDTO);
 	}
 
-	public List<OrderMasterEntity> SearchByOrderId(String orderId) {
-		return this.omRepo.SearchByProductName(orderId);
+//	public Map<String, Object> addUpdateDeleteOrderMaster(OrderMasterDTO omDTO) {
+//		return this.omRepo.addUpdateDeleteOrderMaster(omDTO);
+//	}
+
+	public List<OrderMasterEntity> searchByOrderId(String orderId) {
+		return this.omRepo.searchByProductName(orderId);
 	}
-	
-	public List<OrderMasterEntity> GetAllOrderMaster() {
-		return this.omRepo.GetAllOrderMaster();
+
+	public List<OrderMasterEntity> getAllOrderMaster() {
+		return this.omRepo.getAllOrderMaster();
 	}
-	
-	public Map<String, Object> UpdateOrderMaster(OrderMasterDTO omDTO) {
-		return this.omRepo.UpdateOrderMaster(omDTO);   
+
+//	public Map<String, Object> updateOrderMaster(OrderMasterDTO omDTO) {
+//		return this.omRepo.updateOrderMaster(omDTO);
+//	}
+
+	public List<OrderMasterEntity> getOrdersByCustomerId(String customerId) {
+		return this.omRepo.getOrdersByCustomerId(customerId);
 	}
+
+//	public Map<String, Object> deleteByOrderId( String orderId) {
+//		return this.omRepo.deleteByOrderId(orderId);
+//	}
+
+	public List<OrderMasterEntity> getAllDraftMaster() {
+		return this.omRepo.getAllDraftMaster();
+
+	}
+
+	public Map<String, Double> getOrderCounts() {
+		return this.omRepo.getOrderCounts();
+	}
+
+	public Map<String, Double> getCustomerOrderCounts(String customerId) {
+		// TODO Auto-generated method stub
+		return this.omRepo.getCustomerOrderCounts(customerId);
+	}
+
+//	public String deleteAllOrderMaster() {
+//		return this.omRepo.deleteAllOrderMaster();
+//	}
+
+//	public OrderMasterEntity getDraftById(String draftId) {
+//		return this.omRepo.getDraftById(draftId);
+//	}
+
+//	public void deleteById(String draftId) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+
+
 
 }

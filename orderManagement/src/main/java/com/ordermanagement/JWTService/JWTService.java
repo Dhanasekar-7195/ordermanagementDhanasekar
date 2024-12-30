@@ -8,10 +8,10 @@ import com.ordermanagement.JWTRepository.JWTRepository;
 
 @Component
 public class JWTService {
-	
+
 	@Autowired
 	private JWTRepository jwtRepo;
-	
+
 	public String storeJWT(String userId, String token, String role) {
 		JWTEntity jwtR = new JWTEntity();
 
@@ -36,6 +36,5 @@ public class JWTService {
 		jwtRepo.deleteByToken(token);
 		return null;
 	}
-
 
 }

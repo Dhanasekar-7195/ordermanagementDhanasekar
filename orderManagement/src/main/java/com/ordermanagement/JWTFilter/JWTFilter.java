@@ -19,14 +19,14 @@ import com.ordermanagement.JWTUtility.JWTUtility;
 import com.ordermanagement.user.service.GroupUserDetailsService;
 
 @Component
-public class JWTFilter extends OncePerRequestFilter{
-	
+public class JWTFilter extends OncePerRequestFilter {
+
 	@Autowired
 	private JWTUtility jwtUtility;
-	
+
 	@Autowired
 	private GroupUserDetailsService uService;
-	
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
 			FilterChain filterChain) throws ServletException, IOException {
@@ -55,6 +55,5 @@ public class JWTFilter extends OncePerRequestFilter{
 		}
 		filterChain.doFilter(httpServletRequest, httpServletResponse);
 	}
-
 
 }

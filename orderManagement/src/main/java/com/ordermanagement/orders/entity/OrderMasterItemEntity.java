@@ -18,8 +18,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "order_master_item")
-@Table(name = "order_master_item")
+@Entity(name = "order_master_item_sap")
+@Table(name = "order_master_item_sap")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @Builder
@@ -34,22 +34,46 @@ public class OrderMasterItemEntity {
 			@Parameter(name = StringPrefixedSequenceGenerator.NUMBER_FORMATE_PARAMETER, value = "%05d"),
 
 	})
-	
-    @Id
-    private String orderMasterItemId;
-		
-	private String productName;
-		
-	private String category;
-	
-	private String subCategory;
-	
-	private double price;
-	
-	private long qty;
-	
-	private double totalAmount;
-		
-	private String orderId;
 
+	@Id
+	private String orderMasterItemId;
+	
+	private String product;
+	
+	private String categoryName;
+	
+	private String productType;
+	
+	private String baseUnit;
+	
+	private String productDescription;
+	
+	private double standardPrice;
+	
+	private String currency;
+	
+	private String qty;
+
+	private double totalAmount;
+
+	private String orderId;
+	
 }
+
+//	private String productName;
+//
+//	private String category;
+//
+//	private String subCategory;
+//
+//	private double price;
+//
+
+
+//	private String tax;
+//
+//	private String discount;
+//
+//	private double actualAmount;
+
+//}

@@ -20,8 +20,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAutoConfiguration
 @EnableSwagger2
 @EnableWebMvc
-public class SwaggerConfig implements WebMvcConfigurer{
-	
+public class SwaggerConfig implements WebMvcConfigurer {
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
@@ -29,7 +29,7 @@ public class SwaggerConfig implements WebMvcConfigurer{
 
 		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
-	
+
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
@@ -39,9 +39,8 @@ public class SwaggerConfig implements WebMvcConfigurer{
 
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("Order Management Service").description("OrderManagement APIs")
-				.contact(new Contact("DHANASEKAR S", "https://ikyam.com/", "S.Dhanasekar@gsusstarsoftware.com")).license("DHANASEKAR")
-				.termsOfServiceUrl("https://ikyam.com/").version("1.0").build();
+				.contact(new Contact("DHANASEKAR S", "https://ikyam.com/", "S.Dhanasekar@gsusstarsoftware.com"))
+				.license("DHANASEKAR").termsOfServiceUrl("https://ikyam.com/").version("1.0").build();
 	}
-
 
 }

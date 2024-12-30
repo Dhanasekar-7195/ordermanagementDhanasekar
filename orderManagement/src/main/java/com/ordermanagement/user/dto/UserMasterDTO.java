@@ -12,27 +12,36 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 public class UserMasterDTO {
-	
+
 	private String userId;
-	
+
 	private String userName;
-	
+
 	private String password;
-	
+
 	private boolean active;
-	
+
 	private String role;
-	
+
 	private String email;
-	
+
 	private String token;
+
+	private String companyName;
+
+	private String mobileNumber;
 	
-	private String OrganisationId;
-	
-	private String OrganisationName;
+	private String location;
 
 	private LocalDateTime tokenCreationDate;
 	
-	private String phoneNumber;
+	private double returnCredit;
+	
+	private String tenantId;
+	
+//    private String shippingAddress1;
+//	
+//	private String shippingAddress2;
+
 
 }

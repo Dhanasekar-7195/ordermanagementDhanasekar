@@ -9,22 +9,20 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@EnableAsync 
+@EnableAsync
 @EnableCaching
 @EnableScheduling
 @SpringBootApplication
 @ComponentScan(basePackages = "com.ordermanagement")
-public class OrderManagementApplication extends SpringBootServletInitializer{
+public class OrderManagementApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OrderManagementApplication.class, args);
 	}
-	
+
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(OrderManagementApplication.class);
 	}
-	
-	
 
 }

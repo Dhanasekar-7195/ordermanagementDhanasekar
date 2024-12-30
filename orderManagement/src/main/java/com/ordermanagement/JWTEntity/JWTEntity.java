@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JWTEntity {
-	
+
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@GenericGenerator(name = "generator", strategy = "com.ordermanagement.SequenceGenerator.StringPrefixedSequenceGenerator", parameters = {
 
@@ -41,7 +41,7 @@ public class JWTEntity {
 	private String jwttoken;
 
 	private String userid;
-	
+
 	private String role;
 
 }

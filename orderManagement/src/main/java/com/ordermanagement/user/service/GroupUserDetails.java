@@ -11,15 +11,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.ordermanagement.user.entity.UserMasterEntity;
 
-public class GroupUserDetails implements UserDetails{
-	
+public class GroupUserDetails implements UserDetails {
+
 	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
 	private String email;
 	private boolean isActive;
 	private List<GrantedAuthority> authorities;
-	
+
 	public GroupUserDetails(UserMasterEntity user) {
 		this.username = user.getUserName();
 		this.password = user.getPassword();
@@ -30,7 +30,7 @@ public class GroupUserDetails implements UserDetails{
 				.collect(Collectors.toList());
 
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
@@ -49,9 +49,6 @@ public class GroupUserDetails implements UserDetails{
 		return username;
 	}
 
-	
-
-	
 	@Override
 	public boolean isAccountNonExpired() {
 
@@ -67,7 +64,7 @@ public class GroupUserDetails implements UserDetails{
 	@Override
 	public boolean isCredentialsNonExpired() {
 
-	return true;
+		return true;
 	}
 
 	@Override
@@ -75,9 +72,5 @@ public class GroupUserDetails implements UserDetails{
 
 		return isActive;
 	}
-	
-
-
-
 
 }

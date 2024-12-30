@@ -34,28 +34,32 @@ public class ReturnMasterItemEntity {
 			@Parameter(name = StringPrefixedSequenceGenerator.NUMBER_FORMATE_PARAMETER, value = "%05d"),
 
 	})
-	
+
 	@Id
 	private String returnMasterItemId;
-	
+
 	private String productName;
-	
+
 	private String category;
-	
+
 	private String subCategory;
-	
+
 	private double price;
-	
+
 	private long qty;
-	
+
 	private long returnQty;
-	
+
 	private double invoiceAmount;
-	
+
 	private double creditRequest;
-	
+
 	private String imageId;
-	
+
 	private String returnId;
+
+	private String tax;
+
+	private String discount;
 
 }
