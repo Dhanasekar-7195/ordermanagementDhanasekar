@@ -186,7 +186,9 @@ public class UserMasterController {
 	            "Welcome to IKYAM Order Management System application!\n\n" +
 	            "Username: " + userEnt.getUserName() + "\n\n" +
 	            "Please verify your account by clicking the link below to set your password:\n\n" +
-	            "https://orderbooking.cfapps.us10-001.hana.ondemand.com/#/Create_Account");
+	           // "https://orderbooking.cfapps.us10-001.hana.ondemand.com/#/Create_Account");
+	            "https://omswepapp.cfapps.us10-001.hana.ondemand.com/#/Create_Account");
+
 	    mailSender.send(message);
 
 	    Map<String, Object> response = new LinkedHashMap<>();

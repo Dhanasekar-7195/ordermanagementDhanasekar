@@ -116,9 +116,9 @@ public class CompanyRepository {
 
 		// String schemaName = cENT.getCompanyName();
 		String schemaName = cENT.getCompanyName().toLowerCase().replace(" ", "_");
-		String url = "jdbc:postgresql://postgres-fc35d34f-1e95-4665-bd10-6a88b54cfa44.cqryblsdrbcs.us-east-1.rds.amazonaws.com:5712/DdBTUqiWoQQA";
-		String user = "00a42c4fb4d3";
-		String password = "67a768bd9da79112a2d0667ac7";
+		String url = "jdbc:postgresql://postgres-05bcb8e7-5ac1-4f9f-809d-b4fb4ba125f5.cqryblsdrbcs.us-east-1.rds.amazonaws.com:7062/mynkrcQWyRjV";
+		String user = "95c1692602ef";
+		String password = "26bda3df300ed64e8bdb8f85";
 
 		try (Connection conn = DriverManager.getConnection(url, user, password)) {
 

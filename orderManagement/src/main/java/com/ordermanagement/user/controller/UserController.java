@@ -70,106 +70,72 @@ public class UserController {
 	
 	@PutMapping("/edit-usermaster")
 	public Map<String, Object> EditUserMaster(@RequestBody UserMasterDTO userDTO) {
-	   // UserMasterEntity uEnt = umDAO.getUserById(userDTO.getUserId());
-		
 	    UserMasterEntity userEnt = umDAO.getUserById(userDTO.getUserId());
-	    if (!userEnt.getEmail().equals(userDTO.getEmail())) {
-	    	SimpleMailMessage message = new SimpleMailMessage();
-	        message.setTo(userDTO.getEmail());
-	        message.setSubject("Registration successfully completed!");
-	        message.setText("Hi " + userDTO.getUserName() + ",\n\n" +
-	                "Welcome to IKYAM Order Management System application!\n\n" +
-	                "Please verify your account by clicking the link below to set your password:\n\n" +
-	                "https://orderbooking.cfapps.us10-001.hana.ondemand.com/#/Create_Account");
-	        mailSender.send(message);
+	    if (userEnt != null) {
+	        userEnt.setUserId(userDTO.getUserId());
+	        String trimmedUserName = userDTO.getUserName() != null ? userDTO.getUserName().trim() : null;
+	        userEnt.setUserName(trimmedUserName);
+	        userEnt.setEmail(userDTO.getEmail());
+	        userEnt.setActive(userDTO.isActive());
+	        userEnt.setRole(userDTO.getRole());
+	        userEnt.setToken(userDTO.getToken());
+	        userEnt.setTokenCreationDate(userDTO.getTokenCreationDate());
+	        userEnt.setLocation(userDTO.getLocation());
+	        userEnt.setCompanyName(userDTO.getCompanyName());
+	        userEnt.setMobileNumber(userDTO.getMobileNumber());
+
+	        // Validate mobile number
+	        if (userEnt.getMobileNumber().length() != 10 || !userEnt.getMobileNumber().matches("\\d+")) {
+	            Map<String, Object> response = new LinkedHashMap<>();
+	            response.put("status", "failed");
+	            response.put("code", "510");
+	            response.put("error", "Please enter a valid 10-digit mobile number");
+	            return response;
+	        }
+
+	        // Check for duplicate email
+	        UserMasterEntity uEmail = this.umDAO.findUserByEmailByExcludeUserId(userDTO.getUserId(), userDTO.getEmail());
+	        if (uEmail != null) {
+	            Map<String, Object> response = new LinkedHashMap<>();
+	            response.put("status", "failed");
+	            response.put("code", "509");
+	            response.put("error", "Email already exists");
+	            return response;
+	        }
+
+	        // Check for duplicate phone number
+	        UserMasterEntity uPho = this.umDAO.findUserByPhoneNoByExcludeUserId(userDTO.getUserId(), userDTO.getMobileNumber());
+	        if (uPho != null) {
+	            Map<String, Object> response = new LinkedHashMap<>();
+	            response.put("status", "failed");
+	            response.put("code", "509");
+	            response.put("error", "Mobile number already exists");
+	            return response;
+	        }
+
+	        // Save the updated entity
+	        umDAO.save(userEnt);
+
+	        // Send email only if the update is successful
+	        if (!userEnt.getEmail().equals(userDTO.getEmail())) {
+	            SimpleMailMessage message = new SimpleMailMessage();
+	            message.setTo(userDTO.getEmail());
+	            message.setSubject("Registration successfully completed!");
+	            message.setText("Hi " + userDTO.getUserName() + ",\n\n" +
+	                    "Welcome to IKYAM Order Management System application!\n\n" +
+	                    "Please verify your account by clicking the link below to set your password:\n\n" +
+	                    //"https://orderbooking.cfapps.us10-001.hana.ondemand.com/#/Create_Account");
+	                    "https://omswepapp.cfapps.us10-001.hana.ondemand.com/#/Create_Account");
+	            mailSender.send(message);
+	        }
 	    }
-	    if(userEnt != null) {
-	    userEnt.setUserId(userDTO.getUserId());
-	    String trimmedUserName = userDTO.getUserName() != null ? userDTO.getUserName().trim() : null;
-	    userEnt.setUserName(trimmedUserName);
-	    userEnt.setEmail(userDTO.getEmail());
-	    userEnt.setActive(userDTO.isActive());
-	    userEnt.setRole(userDTO.getRole());
-	    userEnt.setToken(userDTO.getToken());
-	    userEnt.setTokenCreationDate(userDTO.getTokenCreationDate());
-	    userEnt.setLocation(userDTO.getLocation());
-	    userEnt.setCompanyName(userDTO.getCompanyName());
-	    userEnt.setMobileNumber(userDTO.getMobileNumber());
-//	    userEnt.setShippingAddress1(userDTO.getShippingAddress1());
-//	    userEnt.setShippingAddress2(userDTO.getShippingAddress2());
- 
-	    // Check for mobile number validity
-	    if (userEnt.getMobileNumber().length() != 10 || !userEnt.getMobileNumber().matches("\\d+")) {
-	        Map<String, Object> response = new LinkedHashMap<>();
-	        response.put("status", "failed");
-	        response.put("code", "510");
-	        response.put("error", "Please enter a valid 10-digit mobile number");
-	        return response;
-	    }
-	    
-//	    if (userEnt.getShippingAddress2().equalsIgnoreCase(userEnt.getShippingAddress1())) {
-//	        Map<String, Object> response = new LinkedHashMap<>();
-//	        response.put("status", "failed");
-//	        response.put("code", "511");
-//	        response.put("error", "Shipping Address 2 should not be the same as Shipping Address 1");
-//	        return response;
-//	    }
- 
-	    // Check for email uniqueness
-	    UserMasterEntity uEmail = this.umDAO.findUserByEmailByExcludeUserId(userDTO.getUserId(), userDTO.getEmail());
-	    if (uEmail != null) {
-	        Map<String, Object> response = new LinkedHashMap<>();
-	        response.put("status", "failed");
-	        response.put("code", "509");
-	        response.put("error", "Email already exists");
-	        return response;
-	    }
- 
-	    // Check for mobile number uniqueness
-	    UserMasterEntity uPho = this.umDAO.findUserByPhoneNoByExcludeUserId(userDTO.getUserId(), userDTO.getMobileNumber());
-	    if (uPho != null) {
-	        Map<String, Object> response = new LinkedHashMap<>();
-	        response.put("status", "failed");
-	        response.put("code", "509");
-	        response.put("error", "Mobile number already exists");
-	        return response;
-	    }
-//	    String dtoMail = uEnt.getEmail();
-//	    String entityMail = userDTO.getEmail();
-	    
-//	    if (dtoMail.equals(entityMail)) {
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setTo(userDTO.getEmail());
-//        message.setSubject("Registration successfully completed!");
-//        message.setText("Your account has been successfully created in the " + userEnt.getCompanyName() + " system.\n\n"
-//                + "Below are your login credentials:\n"
-//                + "\tUserName: " + userEnt.getUserName() + "\n"
-//                + "\tPassword: " + userDTO.getPassword() + "\n"
-//                + "\tRole: " + userEnt.getRole() + "\n\n"
-//                + "Please use the credentials above to log in to your account at "
-//                + "https://orderbooking.cfapps.us10-001.hana.ondemand.com/.\n\n"
-//                + "For security reasons, we recommend that you update your password after your first login.\n\n"
-//                + "Thanks,\n");
-//
-//        mailSender.send(message); // Ensure email is triggered
-//    }
-	    else
-	    {
- 
-	    // Save updated user information
-	    umDAO.save(userEnt);
-	   }
-	    }
- 
-	    // Only send the email if the email was updated
- 
-	   // }
- 
+
 	    Map<String, Object> response = new LinkedHashMap<>();
 	    response.put("status", "success");
 	    response.put("id", userEnt.getUserId());
 	    return response;
 	}
+
 	
 	@GetMapping("/get_and_save_all_product_data")
 	public String getAndSaveAllProductData() {

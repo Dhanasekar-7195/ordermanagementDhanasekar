@@ -66,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/webjars/**"
             ).permitAll()
            .anyRequest().authenticated(); // Only authenticated requests beyond this point
-     // .anyRequest().permitAll();
+     //.anyRequest().permitAll();
 
         http.logout()
             .clearAuthentication(true)

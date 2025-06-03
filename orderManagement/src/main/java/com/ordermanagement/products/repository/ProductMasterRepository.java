@@ -768,7 +768,8 @@ public class ProductMasterRepository {
 		 
 	        String url = "https://my403545-api.s4hana.cloud.sap/sap/opu/odata/sap/YY1_GETPRODUCTDATA_CDS/YY1_GetProductData?$format=json";
 	        String username = "INTEGRATION";
-	        String password = "gNQH>ydgzvCKfwuxQdcEDQzHMz5YPQfaLxzPHqLz";
+	      //  String password = "gNQH>ydgzvCKfwuxQdcEDQzHMz5YPQfaLxzPHqLz";
+		      String password = "UT8BsHhZkz-cPbMRcvCiaMRzqngFlSAQZTxZBvGM";
 
 	        try {
 	            // Create Authorization Header

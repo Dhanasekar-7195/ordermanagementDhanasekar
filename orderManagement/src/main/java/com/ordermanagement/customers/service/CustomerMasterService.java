@@ -29,6 +29,12 @@ public class CustomerMasterService {
 	public ResponseEntity<Object> getAllCustomerData() {
         return this.cmRepo.getAllCustomerData();
 	}
+	
+	
+	
+	
+	
+	
 
 	public String getAndSaveAllCustomerData() {
         return this.cmRepo.getAndSaveAllCustomerData();

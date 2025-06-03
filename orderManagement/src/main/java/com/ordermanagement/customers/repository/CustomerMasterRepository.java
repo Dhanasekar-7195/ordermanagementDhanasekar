@@ -274,7 +274,9 @@ public class CustomerMasterRepository {
 		 
 	        String url = "https://my403545-api.s4hana.cloud.sap/sap/opu/odata/sap/ZGETBPDATA/ZGETBPDATA?$format=json&$top=500";
 	        String username = "INTEGRATION";
-	        String password = "gNQH>ydgzvCKfwuxQdcEDQzHMz5YPQfaLxzPHqLz";
+	     //   String password = "gNQH>ydgzvCKfwuxQdcEDQzHMz5YPQfaLxzPHqLz";
+	        //  String password = "gNQH>ydgzvCKfwuxQdcEDQzHMz5YPQfaLxzPHqLz";
+		      String password = "UT8BsHhZkz-cPbMRcvCiaMRzqngFlSAQZTxZBvGM";
 
 	        try {
 	            // Create Authorization Header

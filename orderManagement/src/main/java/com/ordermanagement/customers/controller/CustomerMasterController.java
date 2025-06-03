@@ -42,6 +42,9 @@ public class CustomerMasterController {
 		return this.cmService.getAllCustomerData();
 	}	
 	
+	
+	
+	
 	@GetMapping("/get_all_s4hana_customermaster")
 	public List<SaveAllCustomerEntity> getAllS4hanaCustomerMaster() {
 		return this.cmService.getAllS4hanaCustomerMaster();
